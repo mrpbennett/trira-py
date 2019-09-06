@@ -1,5 +1,7 @@
 # trello_py
 
+[![Build Status](https://travis-ci.org/mrpbennett/trira_py.svg?branch=master)](https://travis-ci.org/mrpbennett/trira_py)
+
 _A simple script to make my life easier..._
 
 ## The issue?
