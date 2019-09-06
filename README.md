@@ -93,7 +93,8 @@ for open_tickets in cards:
     except:
         print('error!')
 ```
-Using the if statement `if color == 'red' and status is False:`  within the functions. I was able to check against the response for `color` with a value of `red` and `closed` was `False`. This would pull out all the cards I attached the red label too, these are the tickets I wish to bring up.
+
+Using the if statement `if color == 'red' and status is False:` within the functions. I was able to check against the response for `color` with a value of `red` and `closed` was `False`. This would pull out all the cards I attached the red label too, these are the tickets I wish to bring up.
 
 I then got the `name` and produced an URL from it. The `ticket_num` variable allowed me to append the JIRA URL with its ticket number.
 
