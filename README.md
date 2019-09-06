@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mrpbennett/unittests_tut.svg?branch=master)](https://travis-ci.org/mrpbennett/unittests_tut)
+
 # trello_py
 
 _A simple script to make my life easier..._
