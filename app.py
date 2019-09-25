@@ -2,8 +2,8 @@ import requests
 import json
 import os
 
-API_KEY = os.environ.get('API_KEY')
-API_TOKEN = os.environ.get('API_TOKEN')
+API_KEY = os.environ.get('TRELLO_API_KEY')
+API_TOKEN = os.environ.get('TRELLO_API_TOKEN')
 
 trello_board_ID = '5d25d651252b4b37c8e8f011'
 
