@@ -14,7 +14,14 @@ qs = {
     'token': API_TOKEN
 }
 
-r = requests.get(url, params=qs)
+# try to connect and if fails present an error msg
+try:
+    r = requests.get(url, params=qs)
+    r.raise_for_status()
+except requests.exceptions.HTTPError as err:
+    print(err)
+
+# put output into JSON
 data = r.json()
 
 # extracts the card list from data.
@@ -52,15 +59,15 @@ for open_tickets in cards:
     try:
         if open_tickets['labels']:
 
-            # takes label color and status and stores it as a variable
+            # takes label color, status and stores it as a variable
             color = open_tickets['labels'][0]['color']
             status = open_tickets['closed']
             list_ID = open_tickets['idList']
 
             # loop through the json dict using 'red' and Fasle as logic to print out card names
             open_tickets_func(color, status, list_ID)
-    except:
-        print('error!')
+    except AssertionError as error:
+        print(error)
 
 print(" ")
 print('In Progress / Waiting for customer tickets:')
@@ -68,15 +75,15 @@ for progess_customer in cards:
     try:
         if progess_customer['labels']:
 
-            # takes label color and status and stores it as a variable
+            # takes label color, status and stores it as a variable
             color = progess_customer['labels'][0]['color']
             status = progess_customer['closed']
             list_ID = progess_customer['idList']
 
             # loop through the json dict using 'red' and Fasle as logic to print out card names
             in_progress_with_customer_func(color, status, list_ID)
-    except:
-        print('error!')
+    except AssertionError as error:
+        print(error)
 
 print(" ")
 print('Needs Action - CSM / Client tickets:')
@@ -84,12 +91,12 @@ for needs_action_ in cards:
     try:
         if needs_action_['labels']:
 
-            # takes label color and status and stores it as a variable
+            # takes label color, status and stores it as a variable
             color = needs_action_['labels'][0]['color']
             status = needs_action_['closed']
             list_ID = needs_action_['idList']
 
             # loop through the json dict using 'red' and Fasle as logic to print out card names
             needs_action_func(color, status, list_ID)
-    except:
-        print('error!')
+    except AssertionError as error:
+        print(error)
