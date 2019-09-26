@@ -31,6 +31,7 @@ cards = data.get('cards')
 open_ = '5d25d6527ee01f05c33116a9'
 in_progress_with_customer = '5d25d65291615c20f4694e0c'
 needs_action = '5d5e43a04aa5aa30b02d2833'
+resolved = '5d25d652618ce039711b335d'
 
 
 def open_tickets_func(color, status, list_ID):
@@ -54,6 +55,13 @@ def needs_action_func(color, status, list_ID):
         print(f'{name} -> https://pixalate.atlassian.net/browse/{ticket_num}')
 
 
+def resolved_func(color, status, list_ID):
+    if color == 'red' and list_ID == resolved and status is False:
+        name = resolved_tickets['name']
+        ticket_num = name[0:7]
+        print(f'{name} -> https://pixalate.atlassian.net/browse/{ticket_num}')
+
+
 print('Open Tickets:')
 for open_tickets in cards:
     try:
@@ -70,7 +78,7 @@ for open_tickets in cards:
         print(error)
 
 print(" ")
-print('In Progress / Waiting for customer tickets:')
+print('In Progress / Waiting for customer tickets / On Hold:')
 for progess_customer in cards:
     try:
         if progess_customer['labels']:
@@ -86,7 +94,7 @@ for progess_customer in cards:
         print(error)
 
 print(" ")
-print('Needs Action - CSM / Client tickets:')
+print('Needs Attention:')
 for needs_action_ in cards:
     try:
         if needs_action_['labels']:
@@ -98,5 +106,21 @@ for needs_action_ in cards:
 
             # loop through the json dict using 'red' and Fasle as logic to print out card names
             needs_action_func(color, status, list_ID)
+    except AssertionError as error:
+        print(error)
+
+print(" ")
+print('Resolved:')
+for resolved_tickets in cards:
+    try:
+        if resolved_tickets['labels']:
+
+            # takes label color, status and stores it as a variable
+            color = resolved_tickets['labels'][0]['color']
+            status = resolved_tickets['closed']
+            list_ID = resolved_tickets['idList']
+
+            # loop through the json dict using 'red' and Fasle as logic to print out card names
+            resolved_func(color, status, list_ID)
     except AssertionError as error:
         print(error)
